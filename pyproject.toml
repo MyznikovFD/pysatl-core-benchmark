@@ -45,7 +45,10 @@ classifiers = [
   "Topic :: Scientific/Engineering :: Mathematics",
   "Typing :: Typed",
 ]
-packages = [ { include = "pysatl_core", from = "src" } ]
+packages = [
+  { include = "pysatl_core", from = "src" },
+  { include = "pysatl_core_bench", from = "src" },
+]
 include = [
   { path = "src/pysatl_core/**/*.pyi", format = "wheel" },
   { path = "src/pysatl_core/**/*.pyi", format = "sdist" },
@@ -119,7 +122,7 @@ lint.fixable = [ "ALL" ]
 lint.unfixable = []
 lint.isort.combine-as-imports = true
 lint.isort.force-single-line = false
-lint.isort.known-first-party = [ "pysatl_core" ]
+lint.isort.known-first-party = [ "pysatl_core", "pysatl_core_bench" ]
 lint.isort.order-by-type = true
 
 [tool.codespell]
@@ -158,8 +161,9 @@ warn_return_any = false
 implicit_reexport = true
 
 [tool.pytest.ini_options]
-addopts = "-q --cov=pysatl_core --cov-report=term-missing"
+addopts = "-q --cov=pysatl_core --cov=pysatl_core_bench --cov-report=term-missing"
 testpaths = [ "tests" ]
+pythonpath = [ "src" ]
 
 [tool.coverage.report]
 show_missing = true
@@ -170,6 +174,6 @@ exclude_lines = [
 ]
 
 [tool.coverage.run]
-source = [ "pysatl_core" ]
+source = [ "pysatl_core", "pysatl_core_bench" ]
 branch = true
 parallel = true
